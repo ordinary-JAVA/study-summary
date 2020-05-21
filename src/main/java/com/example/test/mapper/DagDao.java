@@ -14,6 +14,7 @@ import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Mapper
@@ -34,19 +35,16 @@ public interface DagDao {
                          @Param("indexOrderKey") String indexOrderKey,
                          @Param("indexOrder") String indexOrder);
 
+
+
     @SelectProvider(type = DagSqlBuilder.class, method = "buildGetDagInfoCount")
     int getDagCount(@Param("queryEntities") List<QueryEntity> queryEntities,
                     @Param("ownerCode") String ownerCode,
                     @Param("creator") String creator);
 
     @SelectProvider(type = DagSqlBuilder.class, method = "buildGetDagRunList")
-    List<DagRun> getRunList(@Param("queryEntities") List<QueryEntity> queryEntities,
-                            @Param("ownerCode") String ownerCode,
-                            @Param("creator") String creator,
-                            @Param("currentPage") int currentPage,
-                            @Param("numberPerPage") int numberPerPage,
-                            @Param("indexOrderKey") String indexOrderKey,
-                            @Param("indexOrder") String indexOrder);
+    List<Map<String,Object>> getRunList(@Param("name") String name
+                            );
 
     @SelectProvider(type = DagSqlBuilder.class, method = "buildGetDagRunCount")
     int getRunCount(@Param("queryEntities") List<QueryEntity> queryEntities,
@@ -67,6 +65,11 @@ public interface DagDao {
 
     @Update("update idox_owner_dag set owner_code = #{ownerCode},creator = #{creator} where dag_id = #{dagId}")
     void updateOwnerDag(@Param("ownerCode") String ownerCode, @Param("creator") String creator, @Param("dagId") String dagId);
+    @Update("update ${ name } set id = #{ id } ")
+    void updateData(@Param("name")String name,@Param("id")String id);
+
+    @Select("select * from ${ name }")
+    List<Map<String,Object>> queryData(@Param("name")String name);
 
     @Delete("delete from idox_owner_dag where dag_id like CONCAT(#{dagId},'.%') or dag_id = #{dagId}")
     void deleteOwnerDag(@Param("dagId") String dagId);

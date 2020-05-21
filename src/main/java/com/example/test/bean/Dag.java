@@ -6,6 +6,7 @@ package com.example.test.bean;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -68,6 +69,10 @@ public class Dag {
 
     public List<DagState> getDagState() {
         return dagState;
+    }
+    @JsonView(DagView.DagTestView.class)
+    public String getView(){
+        return "test";
     }
 }
 

@@ -76,23 +76,9 @@ public class DagSqlBuilder {
         }}.toString();
     }
 
-    public static String buildGetDagRunList(@Param("queryEntities") List<QueryEntity> queryEntities,
-                                            @Param("ownerCode") String ownerCode,
-                                            @Param("creator") String creator,
-                                            @Param("currentPage") int currentPage,
-                                            @Param("numberPerPage") int numberPerPage,
-                                            @Param("indexOrderKey") String indexOrderKey,
-                                            @Param("indexOrder") String indexOrder) {
-        StringBuilder result = new StringBuilder(buildGetDagRun(false, queryEntities, ownerCode, creator));
-        if (indexOrderKey != null && !indexOrderKey.isEmpty()) {
-            result.append(" ORDER BY ").append(indexOrderKey);
-            if ("ASC".equalsIgnoreCase(indexOrder) || "DESC".equalsIgnoreCase(indexOrder)) {
-                result.append(" ").append(indexOrder);
-            }
-        }
-        if (currentPage >= 0)
-            result.append(" LIMIT ").append(currentPage * numberPerPage).append(",").append(numberPerPage);
-        return result.toString();
+    public static String buildGetDagRunList(@Param("name") String name
+                                           ) {
+        return "select * from "+name;
     }
 
     public static String buildGetDagRunCount(@Param("queryEntities") List<QueryEntity> queryEntities,
