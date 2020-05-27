@@ -68,6 +68,14 @@ public interface DagDao {
     @Update("update ${ name } set id = #{ id } ")
     void updateData(@Param("name")String name,@Param("id")String id);
 
+    @Insert("insert into busi_analysis_type  values (#{id},#{index})")
+    void addData(@Param("id") String id, @Param("index") String index);
+
+    @Update("update busi_analysis_type set indexs = #{ indexs } where indexs_id = #{indexs_id}")
+    void setData(@Param("indexs_id")String indexs_id,@Param("indexs")String indexs);
+
+    @Select("select * from busi_analysis_type where indexs_id = #{id}")
+    List<Map<String,Object>> getData(@Param("id") String id);
     @Select("select * from ${ name }")
     List<Map<String,Object>> queryData(@Param("name")String name);
 

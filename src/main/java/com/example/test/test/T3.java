@@ -20,11 +20,11 @@ public class T3 {
             }
         }
         //syncObjects[2]未执行.acquire()方法
-
-        //lastSemphore curSemphore  index
-        //  2  0  0
-        //  0  1  1
-        //  1  2  2
+        //
+        //        //lastSemphore curSemphore  index
+        //        //  2  0  0
+        //        //  0  1  1
+        //        //  1  2  2
         for (int i = 0; i < N; i++) {
             final Semaphore lastSemphore = i == 2 ? syncObjects[0] : syncObjects[i + 1];
             final Semaphore curSemphore = syncObjects[i];

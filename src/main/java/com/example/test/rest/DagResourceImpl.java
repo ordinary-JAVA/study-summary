@@ -9,12 +9,15 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,6 +27,9 @@ public class DagResourceImpl implements DagResource {
 
     @Autowired
     private DagDao dagDao;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Message<PageList<Dag>> dagInfoList(/*List<String> queryFilters, String ownerCode, String owner,*/
@@ -75,6 +81,22 @@ public class DagResourceImpl implements DagResource {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             System.out.println(e);
             return Message.fail("no");
+        }
+
+    }
+
+    @Override
+    public Message<List<Map<String, Object>>> addData() {
+        try {
+            ExecutorService executorService = Executors.newFixedThreadPool(10);
+            int a=0;
+           for (int i=0;i<100;i++){
+                a+=i;
+                executorService.execute(new TestRunnable(jdbcTemplate,dagDao,i));
+            }
+            return Message.success("success"+a);
+        }catch (Exception e){
+            return Message.fail("fail");
         }
 
     }

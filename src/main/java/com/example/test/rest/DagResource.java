@@ -3,6 +3,7 @@ package com.example.test.rest;
 import com.example.test.bean.Dag;
 import com.example.test.bean.DagView;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -35,5 +36,7 @@ public interface DagResource {
 
     @GetMapping("/1")
     Message<List<Map<String, Object>>> updateData(String name,String id);
+    @GetMapping("/3")
+    Message<List<Map<String, Object>>> addData();
 
 }
