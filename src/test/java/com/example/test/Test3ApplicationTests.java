@@ -1,13 +1,18 @@
 package com.example.test;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
-class Test3ApplicationTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = App.class)
+public class Test3ApplicationTests {
 
     @Test
-    void contextLoads() {
+    public void contextLoads() {
+        System.out.println(1);
     }
 
 }
+

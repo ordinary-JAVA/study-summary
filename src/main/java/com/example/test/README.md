@@ -1,4 +1,4 @@
-我叫李宗仁 今年25岁 毕业于邢台学院 计算机科学与技术系 来北京工作已经大约有两年半的时间了 
+我叫李宗仁 17年 毕业于邢台学院 计算机科学与技术系 来北京工作已经大约有两年半的时间了 
 目前从事Java开发工程师的职位  在此期间也参与过大大小小的两三个项目 从中也学到了一些项目开发过程中的经验 
 在工作之余 也在看一下技术方面的资料来提升自己 从而使得自己在技术和业务方面能有所进步 大概就是这些 谢谢
 
@@ -22,7 +22,11 @@ Jersey 有个servletcontioner 他会去扫描 ResourceConfig中注册的类 项�
 
 
 ArrayList 动态数组  类别
+    创建默认长度为10的数组 当时数据超过长度值是 进行扩容 1.5倍 新建数组 copy数据
+    
 Jersey 与mvc区别
+    Jersey中有一个servletContainer 类 当请求到达servlet容器后 servletContainer
+
 Spring ioc依赖注入类与自己new的类的类型是否一致
 数据库调优
 Inoodb与myisam区别
@@ -30,8 +34,15 @@ Redis 缓存存储数据类型
 Mq oracle使用
 常用Linux命令
 Jdbc操作数据库
+    加载数据库驱动 class.forname
+    获取数据库连接 
+    获取preparstamend对象
+    执行sql
+    获取结果
+    关闭连接
 反射
 Class.forName
+
 
 
 Redis 存储类型  
@@ -39,7 +50,7 @@ Redis 存储类型
 持久化操作
 
     aof 基于对redis的写操作添加对应的日志 
-    rdb 以快照的形式持久化
+    rdb 以快照的形式持久化 
 场景 两个线程去获取两个表中数据  汇总
 
     countdownLatch
@@ -125,21 +136,59 @@ spring bean生命周期
    
     
     
+共享锁 读锁 s锁 共享锁是多个事务对于同一数据可以共享一把锁 都能访问到数据 但是不能修改数据
+排它锁 写锁 x锁 排它锁不能与其他锁同时存在 一个事务获取了一条数据的排它锁 其他事务就不能
+再获取该行的其他锁  包括共享锁和排它锁 但是获取该行数据排它锁的事务可以对数据改行修改和查询
+
+意向锁协议
+
+    事务要获取表a的s锁 必须要获取表a的is锁
+    事务要获取表a的x锁 必须要获取表a的ix锁
+
+mysql innodb select默认不加锁 insert delete update 默认加上排它锁  
+select ... for update 加排它锁 select ... lock in share mode 加共享锁 
+    
+    
+    
+innodb与myisam区别
+
+    innodb支持事务 myisam不支持
+    innodb最小锁粒度行级锁 myisam表级锁
+    innodb不会保存表的总行数 因此select count会很慢 myisam 相反
+    innodb是聚集索引 myisam是非聚集索引 聚集索引的文件存放在主键索引的叶子节点上 因此
+    innodb需要有主键 通过主键索引的效率会很高 但是辅助索引需要两次查询 先查询到主键
+    然后通过主键查询到数据  因此 innodb主键不应该过大 否则会导致其他索引也会很大 而
+    myisam是非聚集索引 主键索引和辅助索引是独立的
+    如果读操作多 可以选择myisam索引 读写频繁 选innodb myisam 数据恢复较为困难
     
     
     
     
     
+springboot比spring的优势
+    springboot可以建立独立的spring应用
+    内嵌Tomcat这种servlet容器
+    无需繁杂的配置文件 以配置类以及bean的形式注入到ioc容器
+    使用@EnableAutoConfiguration实现自动配置
+    提供一些start 整合好的一些版本
     
     
+组合索引
     
+    优势:mysql使用索引的时候 只会选择一个索引 单个索引的限制能力肯定不如组合
+    索引
+    加快检索效率 降低数据的排序成本
+    索引是数据的一部分 对数据更新 有影响 存储空间内存消耗
+
+缓存穿透
+
+
+mq
+
+
+事务传播机制   
     
-    
-    
-    
-    
-    
-    
+默认没有事务时 新建一个事务 有事务后其他事务加入这个事务    
     
     
     
@@ -148,3 +197,24 @@ spring bean生命周期
 
 分布式锁
     基于mysql实现的分布式锁 创建一个锁表 每次操作去获取新增锁数据 每次解锁 删除锁数据
+    
+
+
+
+arraylist linkedlist 双向链表 扩容1.5倍
+hashmap长度小于64不会转红黑树 而是扩容   currentlist
+ 
+hashmap 为何线程不安全  2n次幂 取余与取模一致     cas aqs  syn公平锁  currentHashMap 1.7 分段锁 1.8 syn cas
+
+线程池四种实现  底层实现细节参数 四种区别
+
+jvm 运行介绍 垃圾回收机制 算法 垃圾回收器  
+springaop 实现 动态代理 两种动态代理区别
+
+redis 持久化 淘汰策略  最少使用 基于linkedlist 去记录
+
+聚集索引 非聚集索引 
+
+事务 四大特性 隔离级别 间隙锁 组合索引
+
+springcloud eureka 可用性 分区容错性
