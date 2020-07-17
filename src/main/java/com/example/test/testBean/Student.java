@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Student implements BeanNameAware {
 
+
     private String name;
 
     public Student() {

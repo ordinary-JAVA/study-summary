@@ -1,11 +1,8 @@
 package com.example.test.rest;
 
-import com.alibaba.fastjson.JSON;
 import com.example.test.bean.Dag;
-import com.example.test.bean.DagView;
 import com.example.test.mapper.DagDao;
 import com.example.test.mapper.QueryEntity;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +12,15 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/test")
 public class DagResourceImpl implements DagResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(DagResourceImpl.class);
-
     @Autowired
     private DagDao dagDao;
 
@@ -47,6 +43,17 @@ public class DagResourceImpl implements DagResource {
         int dagCount = dagDao.getDagCount(queryEntities, null, null);
         return Message.success(new PageList<>(dags, currentPage, dagCount));
     }
+
+    @Override
+    public Message<String> test() {
+        String sql="select * from sc";
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
+        maps.forEach(l->l.forEach((k,v)->{
+            System.out.println(k+"-"+v);
+        }));
+        return Message.success("test");
+    }
+
     @Override
     public Message<List<Map<String,Object>>> dagInfoList2(/*List<String> queryFilters, String ownerCode, String owner,*/
             String name/*, String indexOrderKey, String indexOrder*/) {
