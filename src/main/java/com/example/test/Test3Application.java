@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class Test3Application {
 
     public static void main(String[] args) {
+
        // SpringApplication springApplication=new SpringApplication(Test3Application.class);
         SpringApplication.run(Test3Application.class, args);
        /* String[] beanDefinitionNames = run.getBeanDefinitionNames();

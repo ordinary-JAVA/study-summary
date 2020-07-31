@@ -34,12 +34,17 @@ Redis 缓存存储数据类型
 Mq oracle使用
 常用Linux命令
 Jdbc操作数据库
-    加载数据库驱动 class.forname
+    加载数据库驱动 （三选一）
+        class.forname（driverName）
+        DriverManager.registerDriver(driver)
+        properties.setproperty("驱动名"，"驱动");
     获取数据库连接 
-    获取preparstamend对象
-    执行sql
-    获取结果
-    关闭连接
+        DriverManager.getConnection(主机用户名密码);
+    获取preparstatement对象
+        connection.createStatement()
+    执行sql 获取结果
+       Resultset re = statement.execute(sql);
+    关闭连接 先开后关
 反射
 Class.forName
 
