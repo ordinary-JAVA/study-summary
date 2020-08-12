@@ -1,7 +1,5 @@
 package com.example.test.test;
 
-import java.util.Calendar;
-
 /**
  * @author lizongren
  * @create 2020.06.02 20:21
@@ -22,4 +20,5 @@ public class A {
     static {
         x/=3;
     }
+
 }

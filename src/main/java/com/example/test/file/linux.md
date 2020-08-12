@@ -9,3 +9,14 @@ Top 查看虚拟机内存 此内存为实际分配内存 与项目占用内存
 
 Linux查询CPU信息
  cat /proc/cpuinfo
+ 
+ ps -ef |grep '服务名'
+ 
+ netstat -plnt |grep ‘进程号’
+ 
+ 	p显示建立链接的程序名
+ 	l 仅列出正在监听的服务状态
+ 	n转换为数字
+ 	t tcp相关
+ 
+ lsof -i:端口号
