@@ -20,3 +20,6 @@ Linux查询CPU信息
  	t tcp相关
  
  lsof -i:端口号
+ 
+ du -sh ./* 查看当前文件夹下所有文件文件大小
+ cat /dev/null > file.name 清空当前文件
