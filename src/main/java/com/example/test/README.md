@@ -15,6 +15,17 @@
 
 通用服务模块 提供了十几种通用组件 比如 补白 截断 逻辑 填充 获取组件 混合 并发 返回 排除 去重  
 
+分发平台中引入自助报表实现报表的展示与可视化渲染
+线上使用f5进行负载后到nginx 由NGINX做动静分离 session共享（本地）到zuul后分发到具体服务 jwt+oauth认证
+portal 提供整体的场景 业务 碎片 接口配置 提供 ab测试 通用组件化 分发 限流 策略 及通用参数配置 报表 监控 用户操作（封装的）
+对idox的封装 基于idox  添加自己的属性 idox通过调用airflow 配置组件 流程 
+缓存服务 以下服务的配置数据来源
+通用组件服务 基于vert.x 获取 HBASE及Redis中的数据 进行操作后反显或存储
+ab测试服务 通过网关服务配置 是否使用 
+网关服务 log4j2 本身自带简单的ab测试与限流 转ip的 转微服务名称的
+
+运营分析
+主要是 quartz调度 混合形态 推荐策略 营销高价值
 
 Jersey 有个servletcontioner 他会去扫描 ResourceConfig中注册的类 项目中需要把 resource类的全限定名 
 注册到继承ResourceConfig的类中
