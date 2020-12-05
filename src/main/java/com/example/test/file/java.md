@@ -634,3 +634,11 @@ threadLocal 为每一个线程提供了变量副本 使得每个线程在对共�
 @JsonProperty("conn_id")
 private String connId;
 将java属性与数据库属性相对应
+
+
+
+队列
+queue 先进先出 继承collection接口 
+PriorityQueue 实现类 按照元素大小进行重新排序 不允许插入null 
+排序方式 自然排序 集合中元素都实现comparable 否则类型转换异常 
+定制排序 传入一个comparable对象 为排序类型 
