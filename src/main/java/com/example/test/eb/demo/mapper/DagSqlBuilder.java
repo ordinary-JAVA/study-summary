@@ -1,6 +1,9 @@
 package com.example.test.eb.demo.mapper;
 
 
+import com.example.test.eb.demo.bean.QueryEntity;
+import com.example.test.eb.demo.enumdata.BuilderConstants;
+import com.example.test.eb.demo.enumdata.FieldTypeEnum;
 import com.google.common.base.Strings;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
@@ -54,14 +57,14 @@ public class DagSqlBuilder {
                     switch (query.getField()) {
                         case "dag_id":
                         case "owners":
-                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldType.STRING));
+                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldTypeEnum.STRING));
                             break;
                         case "is_active":
                         case "is_paused":
-                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldType.NUMBER));
+                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldTypeEnum.NUMBER));
                             break;
                         case "last_scheduler_run":
-                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldType.DATETIME));
+                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldTypeEnum.DATETIME));
                             break;
                         default:
                             break;
@@ -109,15 +112,15 @@ public class DagSqlBuilder {
                     switch (query.getField()) {
                         case "dag_id":
                         case "state":
-                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldType.STRING));
+                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldTypeEnum.STRING));
                             break;
                         case "id":
-                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldType.NUMBER));
+                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldTypeEnum.NUMBER));
                             break;
                         case "execution_date":
                         case "start_date":
                         case "end_date":
-                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldType.DATETIME));
+                            WHERE(query.condition(BuilderConstants.QUERY_ENTITIES, i, FieldTypeEnum.DATETIME));
                             break;
                         default:
                             break;

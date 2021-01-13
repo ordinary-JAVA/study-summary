@@ -1,5 +1,7 @@
 package com.example.test.eb.demo.bean;
 
+import com.example.test.eb.demo.serialize.CustomTimestampDeserializer;
+import com.example.test.eb.demo.serialize.CustomTimestampSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

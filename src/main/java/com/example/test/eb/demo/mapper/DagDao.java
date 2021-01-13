@@ -8,6 +8,7 @@ package com.example.test.eb.demo.mapper;
 
 import com.example.test.eb.demo.bean.Dag;
 import com.example.test.eb.demo.bean.DagState;
+import com.example.test.eb.demo.bean.QueryEntity;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 import org.springframework.stereotype.Component;
